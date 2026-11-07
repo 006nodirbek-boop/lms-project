@@ -1,5 +1,6 @@
 import pool from "../config/db.js"
 import argon from "argon2"
+import { InternalServerError } from "../utils/error.js"
 
 class UserServices{
 
@@ -12,7 +13,7 @@ class UserServices{
         }
     }
 
-    async createUser(req){
+    async createAdmin(req){
         const{ fullname,phone,password,role_id } = req.body
 
         const existUser = await pool.query("select * from users where phone=$1",[phone])
@@ -38,6 +39,31 @@ class UserServices{
         return{
             status:201,
             message:"User created!"
+        }
+    }
+
+    // async createTeacher(req){
+    //     const { fullname }
+    // }
+
+    async deleteUser(req, next){
+        try {
+            const { userId } = req.params
+
+            const existUser = await pool.query("select * from users where id=$1",[userId])
+
+            if (!existUser.rows.length) {
+                next(new NotFoundError(404,"User not found with this id"))
+            }
+
+            await pool.query("delete from users where id=$1",[userId])
+
+            return{
+                status:200,
+                message:"User deleted"
+            }
+        } catch (error) {
+            next(new InternalServerError(500,error))
         }
     }
 }
