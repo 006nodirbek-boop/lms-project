@@ -15,8 +15,8 @@ class UserController{
         return res.status(resData.status).json(resData)
     }
 
-    async createTeacher(req,res){
-        let resData = await userService.createTeacher(req)
+    async createTeacher(req,res,next){
+        let resData = await userService.createTeacher(req,next)
 
         if (resData) {
             return res.status(resData.status).json(resData)

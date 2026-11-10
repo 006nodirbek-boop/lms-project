@@ -1,5 +1,5 @@
 
-export class NotFounError extends Error{
+export class NotFoundError extends Error{
     constructor(status, message){
         super()
         this.status = status

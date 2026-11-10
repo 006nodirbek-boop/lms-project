@@ -42,9 +42,53 @@ class UserServices{
         }
     }
 
-    // async createTeacher(req){
-    //     const { fullname }
-    // }
+    async createTeacher(req,next){
+        
+        try {
+
+            const {
+                fullname,phone,password,role_id,experience,job,portfolio,description,github,instagram,facebook,telegram,linkedin
+            } = req.body;
+
+            const hashPassword = await argon.hash(password)
+            const teacher = await pool.query("insert into users(fullname,phone,password,role_id) values ($1,$2,$3,$4) RETURNING * ",[fullname,phone,hashPassword,role_id])
+            await pool.query(
+                `INSERT INTO mentor_profile (
+                    user_id,
+                    experience, 
+                    job, 
+                    portfolio, 
+                    description,
+                    github, 
+                    instagram, 
+                    facebook, 
+                    telegram, 
+                    linkedin
+                )
+                VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`,
+                [
+                    teacher.rows[0].id,
+                    experience ?? null,
+                    job ?? null,
+                    portfolio ?? null,
+                    description ?? null,
+                    github ?? null,
+                    instagram ?? null,
+                    facebook ?? null,
+                    telegram ?? null,
+                    linkedin ?? null
+                ]
+            );
+
+            return{
+            status:201,
+            message:"Teacher created!"
+            }  
+
+        } catch (error) {
+            next(new InternalServerError(500,error))
+        }
+    }
 
     async deleteUser(req, next){
         try {

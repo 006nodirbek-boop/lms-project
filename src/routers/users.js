@@ -7,7 +7,7 @@ const router = express.Router()
 router
     .get("/admins",userController.getAdmins)
     .post("/admins",middleware.createUsers,userController.createAdmin)
-    .post("/teachers",middleware.createUsers,userController.createTeacher)
+    .post("/teachers",userController.createTeacher)
     .delete("/users/:userId",userController.deleteUser)
 
 export default router

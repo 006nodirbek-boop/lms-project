@@ -21,7 +21,7 @@ app.use((error,req,res,next)=>{
         fs.appendFileSync(path.join(process.cwd(),"src","log","logger.txt"),
             `[${new Date().toLocaleString()}]_${req.method}_${req.url}_${error.message}\n`)
         
-        res.status(error.listen).join({
+        res.status(error.status).json({
             status:error.status,
             message:"Internal sever error"
         })
