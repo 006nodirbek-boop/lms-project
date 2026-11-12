@@ -4,3 +4,7 @@
 [10.11.2026, 14:19:15]_POST_/api/v1/teachers_error: повторяющееся значение ключа нарушает ограничение уникальности "users_phone_key"
 [10.11.2026, 14:21:39]_POST_/api/v1/teachers_error: повторяющееся значение ключа нарушает ограничение уникальности "users_phone_key"
 [10.11.2026, 14:25:02]_POST_/api/v1/teachers_error: повторяющееся значение ключа нарушает ограничение уникальности "users_phone_key"
+[12.11.2026, 13:08:23]_POST_/api/v1/teachers_error: повторяющееся значение ключа нарушает ограничение уникальности "users_phone_key"
+[12.11.2026, 14:40:13]_POST_/api/v1/login_Cannot read properties of undefined (reading 'length')
+[12.11.2026, 16:26:45]_POST_/api/v1/teachers_error: повторяющееся значение ключа нарушает ограничение уникальности "users_phone_key"
+[12.11.2026, 16:27:19]_POST_/api/v1/teachers_error: повторяющееся значение ключа нарушает ограничение уникальности "users_phone_key"
