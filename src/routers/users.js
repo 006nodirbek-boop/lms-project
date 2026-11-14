@@ -8,7 +8,7 @@ const router = express.Router()
 
 router
     .get("/admins",userController.getAdmins)
-    .post("/admins",authGuard,roleGuard("admin, teacher"),middleware.createUsers,userController.createAdmin)
+    .post("/admins",authGuard,roleGuard("admin"),middleware.createUsers,userController.createAdmin)
     .post("/teachers",userController.createTeacher)
     .delete("/users/:userId",userController.deleteUser)
 

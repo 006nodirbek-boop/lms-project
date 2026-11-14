@@ -29,4 +29,28 @@ app.use((error,req,res,next)=>{
     
 })
 
+
+
+// app.use((error, req, res, next) => {
+//     const statusCode = error.status || error.statusCode || 500;
+
+//     if (statusCode < 500) {
+//         return res.status(statusCode).json({
+//             status: statusCode,
+//             message: error.message
+//         });
+//     }
+
+//     fs.appendFileSync(
+//         path.join(process.cwd(), "src", "log", "logger.txt"),
+//         `[${new Date().toLocaleString()}]_${req.method}_${req.url}_${error.message}\n`
+//     );
+
+//     return res.status(statusCode).json({
+//         status: statusCode,
+//         message: error.message || "Internal Server Error"
+//     });
+// });
+
+
 app.listen(process.env.PORT,() => console.log("Server is running...."))

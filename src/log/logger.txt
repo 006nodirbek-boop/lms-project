@@ -8,3 +8,24 @@
 [12.11.2026, 14:40:13]_POST_/api/v1/login_Cannot read properties of undefined (reading 'length')
 [12.11.2026, 16:26:45]_POST_/api/v1/teachers_error: повторяющееся значение ключа нарушает ограничение уникальности "users_phone_key"
 [12.11.2026, 16:27:19]_POST_/api/v1/teachers_error: повторяющееся значение ключа нарушает ограничение уникальности "users_phone_key"
+[14.11.2026, 12:10:04]_POST_/api/v1/admins_TokenExpiredError: jwt expired
+[14.11.2026, 12:50:56]_GET_/api/v1/teachers/all_res.status is not a function
+[14.11.2026, 12:54:06]_GET_/api/v1/teachers/all_res.status is not a function
+[14.11.2026, 12:57:10]_GET_/api/v1/teachers/all_res.status is not a function
+[14.11.2026, 13:00:39]_GET_/api/v1/teachers/all_res.status is not a function
+[14.11.2026, 13:00:41]_GET_/api/v1/teachers/all_res.status is not a function
+[14.11.2026, 13:00:43]_GET_/api/v1/teachers/all_res.status is not a function
+[14.11.2026, 13:03:14]_GET_/api/v1/teachers/all_res.status is not a function
+[14.11.2026, 13:04:55]_GET_/api/v1/teachers/all_Invalid status code: undefined. Status code must be an integer.
+[14.11.2026, 13:04:57]_GET_/api/v1/teachers/all_Invalid status code: undefined. Status code must be an integer.
+[14.11.2026, 13:06:28]_GET_/api/v1/teachers/all_Invalid status code: undefined. Status code must be an integer.
+[14.11.2026, 13:46:01]_GET_/api/v1/teachers/all_TokenExpiredError: jwt expired
+[14.11.2026, 13:46:08]_GET_/api/v1/teachers/all_TokenExpiredError: jwt expired
+[14.11.2026, 13:46:48]_GET_/api/v1/teachers/all_Invalid status code: undefined. Status code must be an integer.
+[14.11.2026, 13:50:07]_GET_/api/v1/teachers/all_Invalid status code: undefined. Status code must be an integer.
+[14.11.2026, 13:58:49]_GET_/api/v1/teachers/all_Invalid status code: undefined. Status code must be an integer.
+[14.11.2026, 13:59:08]_GET_/api/v1/teachers/all_Invalid status code: undefined. Status code must be an integer.
+[14.11.2026, 14:00:15]_GET_/api/v1/teachers/all_Invalid status code: undefined. Status code must be an integer.
+[14.11.2026, 14:01:32]_GET_/api/v1/teachers/all_Invalid status code: undefined. Status code must be an integer.
+[14.11.2026, 14:01:34]_GET_/api/v1/teachers/all_Invalid status code: undefined. Status code must be an integer.
+[14.11.2026, 14:07:35]_GET_/api/v1/teachers/all_Invalid status code: undefined. Status code must be an integer.
