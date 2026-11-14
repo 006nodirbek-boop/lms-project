@@ -18,6 +18,10 @@ export default (req, res, next)=>{
         if (error.name == "JsonWebTokenError") {
             return next(new BadRequestError(400,"Invalid token"))
         }
+
+        if (error.name == "TokenExpiredError") {
+            return next(new BadRequestError(400,error.message))
+        }
         next(new InternalServerError(500,error))
     }
 }

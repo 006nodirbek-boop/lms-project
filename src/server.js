@@ -1,6 +1,7 @@
 import express from "express"
 import { configDotenv } from "dotenv"
 import appRouter from "./routers/index.js"
+import fileUpload from "express-fileupload"
 import fs from "fs"
 import path from "path"
 
@@ -9,6 +10,8 @@ configDotenv()
 
 const app = express()
 app.use(express.json())
+app.use(fileUpload)
+
 app.use(appRouter)
 
 app.use((error,req,res,next)=>{

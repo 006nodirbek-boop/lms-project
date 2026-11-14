@@ -29,3 +29,4 @@
 [14.11.2026, 14:01:32]_GET_/api/v1/teachers/all_Invalid status code: undefined. Status code must be an integer.
 [14.11.2026, 14:01:34]_GET_/api/v1/teachers/all_Invalid status code: undefined. Status code must be an integer.
 [14.11.2026, 14:07:35]_GET_/api/v1/teachers/all_Invalid status code: undefined. Status code must be an integer.
+[14.11.2026, 16:07:48]_POST_/api/v1/categories_TokenExpiredError: jwt expired
