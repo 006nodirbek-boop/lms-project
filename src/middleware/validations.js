@@ -1,14 +1,31 @@
+import { BadRequestError, InternalServerError } from "../utils/error.js"
 import schema from "../utils/validation.js"
 
 export default{
     createUsers:(req,res,next)=>{
-        let { error } = schema.usersSchema.validate(req.body)
-        if (error) {
-            return res.status(400).json({
-                status:400,
-                message:error.message
-            })
+        try {
+            let { error } = schema.usersSchema.validate(req.body)
+            if (error) {
+                return next(new BadRequestError(400,error.message))
+            }
+
+            return next()
+        } catch (error) {
+            next(new InternalServerError(500,error))
         }
-        return next()
+    },
+
+
+    createCourse:(req,res,next)=>{
+        try {
+            let { error } = schema.coursesSchema.validate(req.body)
+            if (error) {
+                return next(new BadRequestError(400,error.message))
+            }
+
+            return next()
+        } catch (error) {
+            next(new InternalServerError(500,error))
+        }
     }
 }

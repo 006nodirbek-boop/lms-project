@@ -30,3 +30,15 @@
 [14.11.2026, 14:01:34]_GET_/api/v1/teachers/all_Invalid status code: undefined. Status code must be an integer.
 [14.11.2026, 14:07:35]_GET_/api/v1/teachers/all_Invalid status code: undefined. Status code must be an integer.
 [14.11.2026, 16:07:48]_POST_/api/v1/categories_TokenExpiredError: jwt expired
+[17.11.2026, 14:04:29]_POST_/api/v1/courses_повторяющееся значение ключа нарушает ограничение уникальности "courses_name_key"
+[17.11.2026, 14:05:12]_POST_/api/v1/courses_повторяющееся значение ключа нарушает ограничение уникальности "courses_name_key"
+[17.11.2026, 14:07:10]_POST_/api/v1/courses_повторяющееся значение ключа нарушает ограничение уникальности "courses_name_key"
+[17.11.2026, 14:08:45]_POST_/api/v1/courses_повторяющееся значение ключа нарушает ограничение уникальности "courses_name_key"
+[17.11.2026, 14:55:18]_POST_/api/v1/courses_INSERT или UPDATE в таблице "courses" нарушает ограничение внешнего ключа "courses_category_id_fkey"
+[17.11.2026, 15:28:29]_GET_/api/v1/courses_столбец "approved" не существует
+[17.11.2026, 15:29:03]_GET_/api/v1/courses_столбец "approve" не существует
+[17.11.2026, 15:29:35]_GET_/api/v1/courses_столбец "approve" не существует
+[17.11.2026, 15:29:35]_GET_/api/v1/courses_столбец "approve" не существует
+[17.11.2026, 16:37:42]_POST_/api/v1/teachers_error: повторяющееся значение ключа нарушает ограничение уникальности "users_phone_key"
+[17.11.2026, 16:40:09]_POST_/api/v1/teachers_error: повторяющееся значение ключа нарушает ограничение уникальности "users_phone_key"
+[17.11.2026, 16:40:36]_POST_/api/v1/login_The first argument must be of type string or an instance of Buffer, ArrayBuffer, or Array or an Array-like Object. Received undefined
