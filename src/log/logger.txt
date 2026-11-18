@@ -42,3 +42,28 @@
 [17.11.2026, 16:37:42]_POST_/api/v1/teachers_error: повторяющееся значение ключа нарушает ограничение уникальности "users_phone_key"
 [17.11.2026, 16:40:09]_POST_/api/v1/teachers_error: повторяющееся значение ключа нарушает ограничение уникальности "users_phone_key"
 [17.11.2026, 16:40:36]_POST_/api/v1/login_The first argument must be of type string or an instance of Buffer, ArrayBuffer, or Array or an Array-like Object. Received undefined
+[18.11.2026, 16:43:45]_GET_/api/v1/sections/1_Cannot read properties of undefined (reading 'id')
+[18.11.2026, 16:43:56]_GET_/api/v1/sections/2_Cannot read properties of undefined (reading 'id')
+[18.11.2026, 16:47:06]_GET_/api/v1/sections/1_TypeError: Cannot read properties of undefined (reading 'role')
+[18.11.2026, 16:47:10]_GET_/api/v1/sections/1_TypeError: Cannot read properties of undefined (reading 'role')
+[18.11.2026, 16:47:15]_GET_/api/v1/sections/2_TypeError: Cannot read properties of undefined (reading 'role')
+[18.11.2026, 16:47:46]_GET_/api/v1/sections/1_TypeError: Cannot read properties of undefined (reading 'role')
+[18.11.2026, 16:51:37]_GET_/api/v1/sections/1_TypeError: Cannot read properties of undefined (reading 'role')
+[18.11.2026, 16:51:49]_GET_/api/v1/sections/1_TypeError: Cannot read properties of undefined (reading 'role')
+[18.11.2026, 16:54:05]_GET_/api/v1/sections/1_TypeError: Cannot read properties of undefined (reading 'role')
+[18.11.2026, 16:54:07]_GET_/api/v1/sections/1_TypeError: Cannot read properties of undefined (reading 'role')
+[18.11.2026, 16:55:31]_GET_/api/v1/sections/1_TypeError: Cannot read properties of undefined (reading 'role')
+[18.11.2026, 16:55:32]_GET_/api/v1/sections/1_TypeError: Cannot read properties of undefined (reading 'role')
+[18.11.2026, 16:57:40]_GET_/api/v1/sections/1_TypeError: Cannot read properties of undefined (reading 'role')
+[18.11.2026, 16:58:43]_GET_/api/v1/sections/1_TypeError: Cannot read properties of undefined (reading 'role')
+[18.11.2026, 16:58:44]_GET_/api/v1/sections/1_TypeError: Cannot read properties of undefined (reading 'role')
+[18.11.2026, 16:58:45]_GET_/api/v1/sections/1_TypeError: Cannot read properties of undefined (reading 'role')
+[18.11.2026, 17:02:58]_GET_/api/v1/sections/1_TypeError: Cannot read properties of undefined (reading 'role')
+[18.11.2026, 17:02:59]_GET_/api/v1/sections/1_TypeError: Cannot read properties of undefined (reading 'role')
+[18.11.2026, 17:58:39]_POST_/api/v1/lessons_ошибка синтаксиса в конце
+[18.11.2026, 18:25:07]_POST_/api/v1/lessons_ошибка синтаксиса в конце
+[18.11.2026, 21:00:32]_GET_/api/v1/lessons/2_next is not defined
+[18.11.2026, 21:00:45]_GET_/api/v1/lessons/3_next is not defined
+[18.11.2026, 21:57:00]_POST_/api/v1/materials_materialsService.createMaterial is not a function
+[18.11.2026, 21:58:44]_POST_/api/v1/materials_materialsService.createMaterial is not a function
+[18.11.2026, 22:00:55]_POST_/api/v1/materials_materialsService.createMaterial is not a function
