@@ -1,5 +1,5 @@
 import pool from "../config/db.js"
-import { NotFoundError } from "../utils/error.js"
+import { ConflictError, NotFoundError } from "../utils/error.js"
 import argon  from "argon2"
 import jwt from "jsonwebtoken"
 
@@ -27,6 +27,34 @@ class AuthService{
             role:role.rows[0].name,
             accessToken:jwt.sign({id:existUser.id,phone:existUser.phone,role:role.rows[0].name},process.env.JWT_SECRET,{expiresIn:"30m"}),
             refreshToken:jwt.sign({id:existUser.id,phone:existUser.phone,role:role.rows[0].name},process.env.JWT_SECRET,{expiresIn:"24h"})
+        }
+    }
+
+
+    async register(req,next){
+        const { fullname, phone, password, role_id, course_id } = req.body
+
+        let existStudent = await pool.query("select * from users where phone=$1",[phone])
+
+        if (existStudent.rows.length) {
+            return next(new ConflictError(409,"Student already rigester this phone"))
+        }
+
+        const hashPass = await argon.hash(password)
+
+        let student = await pool.query("insert into users(fullname, phone, password, role_id) values($1,$2,$3,$4) returning id",[fullname,phone,hashPass,role_id])
+
+        if (student.rows.length) {
+            await pool.query("insert into payments(student_id,course_id) values($1,$2)",[student.rows[0].id,course_id])
+        }
+
+        return{
+            status:201,
+            message:"Student successfully register and buy course",
+            role:"student",
+            accessToken:jwt.sign({id: student.rows[0].id, phone: phone, role: "student"},process.env.JWT_SECRET,{expiresIn:"30m"}),
+            refreshTokenToken:jwt.sign({id: student.rows[0].id, phone: phone, role: "student"},process.env.JWT_SECRET,{expiresIn:"24h"}),
+
         }
     }
 }

@@ -9,6 +9,14 @@ class AuthController{
             return res.status(resData.status).json(resData)
         }
     }
+
+    async register(req,res,next){
+       let resData = await authService.register(req,next)
+
+        if (resData) {
+            return res.status(resData.status).json(resData)
+        } 
+    }
 }
 
 

@@ -67,3 +67,6 @@
 [18.11.2026, 21:57:00]_POST_/api/v1/materials_materialsService.createMaterial is not a function
 [18.11.2026, 21:58:44]_POST_/api/v1/materials_materialsService.createMaterial is not a function
 [18.11.2026, 22:00:55]_POST_/api/v1/materials_materialsService.createMaterial is not a function
+[19.11.2026, 02:23:20]_POST_/api/v1/homeworks_The "path" argument must be of type string. Received undefined
+[19.11.2026, 14:50:32]_POST_/api/v1/register_значение NULL в столбце "role_id" отношения "users" нарушает ограничение NOT NULL
+[19.11.2026, 14:52:06]_POST_/api/v1/register_INSERT или UPDATE в таблице "payments" нарушает ограничение внешнего ключа "payments_student_id_fkey"
