@@ -70,3 +70,10 @@
 [19.11.2026, 02:23:20]_POST_/api/v1/homeworks_The "path" argument must be of type string. Received undefined
 [19.11.2026, 14:50:32]_POST_/api/v1/register_значение NULL в столбце "role_id" отношения "users" нарушает ограничение NOT NULL
 [19.11.2026, 14:52:06]_POST_/api/v1/register_INSERT или UPDATE в таблице "payments" нарушает ограничение внешнего ключа "payments_student_id_fkey"
+[21.11.2026, 14:13:13]_POST_/api/v1/students/courses/buy/10_неверный синтаксис для типа integer: "{"courseId":"10"}"
+[21.11.2026, 14:14:19]_POST_/api/v1/students/courses/buy/10_next is not defined
+[21.11.2026, 14:15:19]_POST_/api/v1/students/courses/buy/5_next is not defined
+[21.11.2026, 14:18:16]_POST_/api/v1/students/courses/buy/5_next is not defined
+[21.11.2026, 14:43:47]_GET_/api/v1/students/courses/my_Cannot read properties of undefined (reading '0')
+[21.11.2026, 14:45:21]_GET_/api/v1/students/courses/my_Cannot read properties of undefined (reading '0')
+[21.11.2026, 14:46:20]_GET_/api/v1/students/courses/my_Cannot read properties of undefined (reading '0')

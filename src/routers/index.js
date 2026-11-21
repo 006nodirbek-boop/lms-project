@@ -9,6 +9,7 @@ import lessonRouter from "./lessons.js"
 import materialRouter from "./materials.js"
 import homeworkRouter from "./homeworks.js"
 import examRouter from "./exams.js"
+import studentRouter from "./students.js"
 
 import express from "express"
 
@@ -25,5 +26,6 @@ appRouter.use("/api/v1",lessonRouter)
 appRouter.use("/api/v1",materialRouter)
 appRouter.use("/api/v1",homeworkRouter)
 appRouter.use("/api/v1",examRouter)
+appRouter.use("/api/v1",studentRouter)
 
 export default appRouter

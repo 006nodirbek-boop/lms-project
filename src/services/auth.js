@@ -40,6 +40,15 @@ class AuthService{
             return next(new ConflictError(409,"Student already rigester this phone"))
         }
 
+        const existCourse = await pool.query("select * from courses where id=$1",[course_id])
+        if (!existCourse.rows.length) {
+            next(new NotFoundError(404,"Course not found with this id"))
+        }
+
+        if (existCourse.rows[0].aprove) {
+            return next(new ForBiddenError(403,"You can't buy this course"))
+        }
+
         const hashPass = await argon.hash(password)
 
         let student = await pool.query("insert into users(fullname, phone, password, role_id) values($1,$2,$3,$4) returning id",[fullname,phone,hashPass,role_id])

@@ -5,7 +5,7 @@ class SectionService{
 
     async getSectionsById(req,next){
         const { courseId } = req.params
-        const teacherId = req.user.id
+        const userId = req.user.id
     
 
         const existCourse = await pool.query("select * from courses where id=$1",[courseId])
@@ -13,8 +13,15 @@ class SectionService{
             next(new NotFoundError(404,"Course not found"))
         }
 
-        if (req.user.role == "teacher" && teacherId != existCourse.rows[0].user_id) {
+        if (req.user.role == "teacher" && userId != existCourse.rows[0].user_id) {
            return next(new ForBiddenError(403,"You can not add section to this course"))
+        }
+
+        if (req.user.role == "student") {
+            const payments = await pool.query("select * from payments where student_id=$1 and course_id=$2",[userId,courseId])
+            if (!payments.rows.length) {
+                return next(new ForBiddenError(403,"You can't see this course"))
+            }
         }
 
         const sections = await pool.query("select * from sections where course_id=$1",[courseId])
