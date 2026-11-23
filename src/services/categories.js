@@ -1,5 +1,5 @@
 import pool from "../config/db.js"
-import { ConflictError } from "../utils/error.js"
+import { ConflictError, NotFoundError } from "../utils/error.js"
 
 class CategoriesService{
 
@@ -28,7 +28,32 @@ class CategoriesService{
             message:"Category added!"
         }
     }
+
+
+    async deleteCategory(req,next){
+        try {
+            const { categoryId } = req.params
+
+            const existCategory = await pool.query("select * from categories where id=$1 and status='active'",[categoryId])
+
+            if (!existCategory.rows.length) {
+                return next(new NotFoundError(404,"Bunday category mavjud emas!"))
+            }
+
+            await pool.query("update categories set status='deleted' where id=$1",[categoryId])
+
+            return {
+                status: 200,
+                message: "Category deleted successfully!"
+            }
+
+        } catch (error) {
+            return next(new InternalServerError(500,error.message))
+        }
+    }
+
 }
+
 
 const categoriesService = new CategoriesService()
 

@@ -1,5 +1,5 @@
 import pool from "../config/db.js"
-import { ForBiddenError, NotFoundError } from "../utils/error.js"
+import { ConflictError, ForBiddenError, InternalServerError, NotFoundError } from "../utils/error.js"
 
 class SectionService{
 
@@ -58,6 +58,38 @@ class SectionService{
             message:"create section"
         }
 
+    }
+
+    async deleteSection(req,next){
+        try {
+            const { sectionId } = req.params
+
+            const existSection = await pool.query(`select s.*, c.user_id from sections s inner join courses c on s.course_id = c.id where s.id=$1`,[sectionId])
+
+            if (!existSection.rows.length) {
+                return next(new NotFoundError(404,"Section not found!"))
+            }
+
+            if (req.user.role === "teacher" && req.user.id != existSection.rows[0].user_id) {
+                return next(new ForBiddenError(403,"You can not delete this section!"))
+            }
+
+            const existLessons = await pool.query("select * from lessons where section_id=$1",[sectionId])
+
+            if (existLessons.rows.length) {
+                return next(new ConflictError(409,"First delete all lessons in this section!"))
+            }
+
+            await pool.query("delete from sections where id=$1",[sectionId])
+
+            return {
+                status:200,
+                message:"Section deleted successfully!"
+            }
+
+        } catch (error) {
+            return next(new InternalServerError(500,error.message))
+        }
     }
 }
 

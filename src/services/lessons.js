@@ -1,6 +1,6 @@
 import pool from "../config/db.js"
 import { extname, join } from "path"
-import { BadRequestError, ConflictError, NotFoundError } from "../utils/error.js"
+import { BadRequestError, ConflictError, ForBiddenError, InternalServerError, NotFoundError } from "../utils/error.js"
 
 class LessonsService{
 
@@ -53,7 +53,7 @@ class LessonsService{
         }
 
 
-        const allowedFileTypes = [".mp4",".mov",".avi",".wmv",".flv",".mkv"]
+        const allowedFileTypes = [".mp4",".mov",".avi",".wmv",".flv",".mkv",".pdf",".png"]
 
         if (!allowedFileTypes.includes(extname(file.name))) {
             return next(new BadRequestError(400, "Invalid file type"))
@@ -73,6 +73,34 @@ class LessonsService{
             message:"Lesson created!"
         }
     }
+
+    async deleteLesson(req, next) {
+        try {
+            const { lessonId } = req.params
+
+            const existLesson = await pool.query(`select l.*, c.user_id from lessons l inner join sections s on l.section_id = s.id inner join courses c on s.course_id = c.id where l.id=$1`,[lessonId])
+
+            if (!existLesson.rows.length) {
+                return next(new NotFoundError(404, "Lesson not found!"))
+            }
+
+            if (req.user.role === "teacher" && req.user.id != existLesson.rows[0].user_id) {
+                return next(new ForBiddenError(403, "You can not delete this lesson!"))
+            }
+
+            await pool.query("delete from lessons where id=$1",[lessonId])
+
+            return {
+                status: 200,
+                message: "Lesson deleted successfully!"
+            }
+
+        } catch (error) {
+            return next(new InternalServerError(500, error.message))
+        }
+    }
+
+
 }
 
 const lessonsService = new LessonsService()

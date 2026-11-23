@@ -77,3 +77,48 @@
 [21.11.2026, 14:43:47]_GET_/api/v1/students/courses/my_Cannot read properties of undefined (reading '0')
 [21.11.2026, 14:45:21]_GET_/api/v1/students/courses/my_Cannot read properties of undefined (reading '0')
 [21.11.2026, 14:46:20]_GET_/api/v1/students/courses/my_Cannot read properties of undefined (reading '0')
+[21.11.2026, 19:20:07]_DELETE_/api/v1/categories/1_InternalServerError is not defined
+[21.11.2026, 19:20:15]_DELETE_/api/v1/categories/1_InternalServerError is not defined
+[21.11.2026, 19:20:50]_POST_/api/v1/categories_undefined
+[21.11.2026, 19:21:11]_POST_/api/v1/categories_undefined
+[21.11.2026, 19:26:16]_DELETE_/api/v1/categories/1_InternalServerError is not defined
+[21.11.2026, 19:26:17]_DELETE_/api/v1/categories/1_InternalServerError is not defined
+[21.11.2026, 19:26:19]_DELETE_/api/v1/categories/1_InternalServerError is not defined
+[21.11.2026, 19:26:33]_POST_/api/v1/categories_undefined
+[21.11.2026, 19:26:43]_DELETE_/api/v1/categories/10_InternalServerError is not defined
+[21.11.2026, 19:26:44]_DELETE_/api/v1/categories/10_InternalServerError is not defined
+[21.11.2026, 19:26:46]_DELETE_/api/v1/categories/10_InternalServerError is not defined
+[21.11.2026, 19:26:47]_DELETE_/api/v1/categories/10_InternalServerError is not defined
+[21.11.2026, 19:29:06]_DELETE_/api/v1/categories/10_InternalServerError is not defined
+[21.11.2026, 19:29:53]_DELETE_/api/v1/categories/1_InternalServerError is not defined
+[21.11.2026, 19:32:37]_DELETE_/api/v1/categories/4_InternalServerError is not defined
+[22.11.2026, 20:47:18]_GET_/api/v1/lessons/2_next is not defined
+[22.11.2026, 20:47:31]_GET_/api/v1/lessons/3_next is not defined
+[22.11.2026, 20:48:12]_DELETE_/api/v1/lessons/1_UPDATE или DELETE в таблице "lessons" нарушает ограничение внешнего ключа "materials_lesson_id_fkey" таблицы "materials"
+[22.11.2026, 20:48:30]_DELETE_/api/v1/lessons/1_UPDATE или DELETE в таблице "lessons" нарушает ограничение внешнего ключа "materials_lesson_id_fkey" таблицы "materials"
+[23.11.2026, 15:44:31]_DELETE_/api/v1/lessons/1_UPDATE или DELETE в таблице "lessons" нарушает ограничение внешнего ключа "homeworks_lesson_id_fkey" таблицы "homeworks"
+[23.11.2026, 15:55:54]_DELETE_/api/v1/lessons/1_UPDATE или DELETE в таблице "lessons" нарушает ограничение внешнего ключа "homeworks_lesson_id_fkey" таблицы "homeworks"
+[23.11.2026, 15:56:16]_DELETE_/api/v1/lessons/1_UPDATE или DELETE в таблице "lessons" нарушает ограничение внешнего ключа "homeworks_lesson_id_fkey" таблицы "homeworks"
+[23.11.2026, 17:03:55]_POST_/api/v1/exams_повторяющееся значение ключа нарушает ограничение уникальности "exams_varianta_key"
+[23.11.2026, 17:04:08]_POST_/api/v1/exams_повторяющееся значение ключа нарушает ограничение уникальности "exams_varianta_key"
+[23.11.2026, 17:04:14]_POST_/api/v1/exams_повторяющееся значение ключа нарушает ограничение уникальности "exams_varianta_key"
+[23.11.2026, 17:18:20]_PUT_/api/v1/exams/1_столбец "variantA" в таблице "exams" не существует
+[23.11.2026, 17:18:51]_PUT_/api/v1/exams/1_столбец "variantA" в таблице "exams" не существует
+[23.11.2026, 17:19:09]_PUT_/api/v1/exams/1_столбец "variantA" в таблице "exams" не существует
+[23.11.2026, 17:19:39]_PUT_/api/v1/exams/1_столбец "variantA" в таблице "exams" не существует
+[23.11.2026, 17:20:26]_PUT_/api/v1/exams/1_столбец "variantA" в таблице "exams" не существует
+[23.11.2026, 17:21:33]_PUT_/api/v1/exams/1_столбец "variantA" в таблице "exams" не существует
+[23.11.2026, 17:21:42]_PUT_/api/v1/exams/1_столбец "variantA" в таблице "exams" не существует
+[23.11.2026, 17:23:36]_GET_/api/v1/lessons/2_next is not defined
+[23.11.2026, 17:23:42]_GET_/api/v1/lessons/4_next is not defined
+[23.11.2026, 17:23:47]_GET_/api/v1/lessons/5_next is not defined
+[23.11.2026, 17:23:52]_GET_/api/v1/lessons/19_next is not defined
+[23.11.2026, 17:23:56]_GET_/api/v1/lessons/18_next is not defined
+[23.11.2026, 17:24:39]_POST_/api/v1/exams_повторяющееся значение ключа нарушает ограничение уникальности "exams_varianta_key"
+[23.11.2026, 17:24:44]_POST_/api/v1/exams_повторяющееся значение ключа нарушает ограничение уникальности "exams_varianta_key"
+[23.11.2026, 17:26:35]_POST_/api/v1/exams_повторяющееся значение ключа нарушает ограничение уникальности "exams_varianta_key"
+[23.11.2026, 17:26:42]_POST_/api/v1/exams_повторяющееся значение ключа нарушает ограничение уникальности "exams_varianta_key"
+[23.11.2026, 17:26:49]_POST_/api/v1/exams_повторяющееся значение ключа нарушает ограничение уникальности "exams_varianta_key"
+[23.11.2026, 17:27:03]_POST_/api/v1/exams_повторяющееся значение ключа нарушает ограничение уникальности "exams_varianta_key"
+[23.11.2026, 17:27:14]_POST_/api/v1/exams_повторяющееся значение ключа нарушает ограничение уникальности "exams_varianta_key"
+[23.11.2026, 17:27:20]_POST_/api/v1/exams_повторяющееся значение ключа нарушает ограничение уникальности "exams_varianta_key"

@@ -1,6 +1,6 @@
 import pool from "../config/db.js"
 import { extname, join } from "path"
-import { BadRequestError, ConflictError, NotFoundError } from "../utils/error.js"
+import { BadRequestError, ConflictError, ForBiddenError, InternalServerError, NotFoundError } from "../utils/error.js"
 
 class MaterialsService{
 
@@ -72,6 +72,93 @@ class MaterialsService{
             message:"Material created!"
         }
     }
+
+    
+    async deleteMaterial(req, next) {
+        try {
+            const { materialId } = req.params
+
+            const existMaterial = await pool.query(`select m.*, c.user_id from materials m inner join lessons l on m.lesson_id = l.id inner join sections s on l.section_id = s.id inner join courses c on s.course_id = c.id where m.id=$1`,[materialId])
+
+            if (!existMaterial.rows.length) {
+                return next(
+                    new NotFoundError(404, "Material not found!")
+                )
+            }
+
+            if (req.user.role === "teacher" && req.user.id != existMaterial.rows[0].user_id) {
+                return next(
+                    new ForBiddenError(403, "You can not delete this material!")
+                )
+            }
+
+            await pool.query("delete from materials where id=$1",[materialId])
+
+            return {
+                status: 200,
+                message: "Material deleted successfully!"
+            }
+
+        } catch (error) {
+            return next(
+                new InternalServerError(500, error.message)
+            )
+        }
+    }
+
+
+    async updateMaterial(req, next) {
+        try {
+            const { materialId } = req.params
+            const { description } = req.body
+
+            const existMaterial = await pool.query(`select m.*, c.user_id from materials m inner join lessons l on m.lesson_id = l.id inner join sections s on l.section_id = s.id inner join courses c on s.course_id = c.id where m.id=$1`,[materialId])
+
+            if (!existMaterial.rows.length) {
+                return next(
+                    new NotFoundError(404, "Material not found!")
+                )
+            }
+
+            if (req.user.role === "teacher" && req.user.id != existMaterial.rows[0].user_id) {
+                return next(
+                    new ForBiddenError(403, "You can not update this material!")
+                )
+            }
+
+            const allowedFileTypes = [".pdf", ".doc", ".docx",".ppt", ".pptx", ".jpg",".png", ".jpeg"]
+
+            let filename = existMaterial.rows[0].file
+
+            const file = req.files?.file
+
+            if (file) {
+                if (!allowedFileTypes.includes(extname(file.name).toLowerCase())) {
+                    return next(
+                        new BadRequestError(400, "Invalid file type")
+                    )
+                }
+
+                filename = Date.now() + extname(file.name)
+
+                await file.mv(join(process.cwd(), "src", "uploads", filename))
+            }
+
+            await pool.query(`update materials set description=$1, file=$2 where id=$3`,[description ?? existMaterial.rows[0].description,filename,materialId])
+
+            return {
+                status: 200,
+                message: "Material updated successfully!"
+            }
+
+        } catch (error) {
+            return next(
+                new InternalServerError(500, error.message)
+            )
+        }
+    }
+
+
 }
 
 const materialsService = new MaterialsService()

@@ -8,5 +8,5 @@ const router = express.Router()
 router
     .get("/categories/all",authGuard,roleGuard("admin"),categoryController.getAllCategories)
     .post("/categories",authGuard,roleGuard("admin"),categoryController.createCategory)
-
+    .delete("/categories/:categoryId",authGuard,roleGuard("admin"),categoryController.deleteCategory)
 export default router 

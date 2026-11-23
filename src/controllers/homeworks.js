@@ -15,6 +15,22 @@ class HomeworkController{
             return res.status(resData.status).json(resData)
         }
     }
+
+    async updateHomework(req, res, next) {
+        let resData = await homeworkService.updateHomework(req, next)
+
+        if (resData) {
+            return res.status(resData.status).json(resData)
+        }
+    }
+
+    async deleteHomework(req, res, next) {
+        let resData = await homeworkService.deleteHomework(req, next)
+
+        if (resData) {
+            return res.status(resData.status).json(resData)
+        }
+    }
 }
 
 const homeworkController = new HomeworkController()

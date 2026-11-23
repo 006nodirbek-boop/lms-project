@@ -8,5 +8,6 @@ const router = express.Router()
 router
     .get("/lessons/:sectionId",authGuard,lessonsController.getAllLessons)
     .post("/lessons",authGuard,roleGuard("admin","teacher"),lessonsController.createLesson)
+    .delete("/lessons/:lessonId",authGuard,roleGuard("admin","teacher"),lessonsController.deleteLesson)
 
 export default router

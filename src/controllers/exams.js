@@ -15,6 +15,14 @@ class ExamController{
             return res.status(resData.status).json(resData)
         }
     }
+
+    async updateExam(req, res, next) {
+        let resData = await examsService.updateExam(req, next)
+
+        if (resData) {
+            return res.status(resData.status).json(resData)
+        }
+    }
 }
 
 const examController = new ExamController()
