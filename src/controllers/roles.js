@@ -15,6 +15,14 @@ class RoleController{
         }
     }
 
+    async updateRole(req, res, next) {
+        let resData = await roleService.updateRole(req, next);
+
+        if (resData) {
+            return res.status(resData.status).json(resData);
+        }
+    }
+
     async deleteRole(req,res,next){
         let resData = await roleService.deleteRole(req,next)
         if (resData) {

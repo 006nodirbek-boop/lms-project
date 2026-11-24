@@ -23,6 +23,16 @@ class UserController{
         }
     }
 
+
+    async updateUser(req, res, next) {
+        let resData = await userService.updateUser(req, next);
+
+        if (resData) {
+            return res.status(resData.status).json(resData);
+        }
+    }
+
+
     async deleteUser(req,res,next){
         let resData = await userService.deleteUser(req,next)
 

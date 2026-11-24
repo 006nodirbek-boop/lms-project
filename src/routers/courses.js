@@ -12,5 +12,7 @@ router
     .get("/courses/all",authGuard,roleGuard("admin"),courseController.getAllCourses)
     .post("/courses",authGuard,roleGuard("teacher"),middleware.createCourse,courseController.createCourse)
     .put("/courses/aprove/:courseId",authGuard,roleGuard("admin"),courseController.aproveCourse)
+    .put("/courses/:courseId",authGuard,roleGuard("teacher","admin"),middleware.createCourse,courseController.updateCourse)
+    .delete("/courses/:courseId",authGuard,roleGuard("teacher", "admin"),courseController.deleteCourse)
 
 export default router

@@ -23,6 +23,14 @@ class ExamController{
             return res.status(resData.status).json(resData)
         }
     }
+
+    async deleteExam(req,res,next){
+        let resData = await examsService.deleteExam(req,next)
+
+        if (resData){
+            return res.status(resData.status).json(resData)
+        }
+    }
 }
 
 const examController = new ExamController()

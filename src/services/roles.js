@@ -32,6 +32,45 @@ class RoleService {
         }
     }
 
+
+    async updateRole(req, next) {
+        try {
+            const { roleId } = req.params;
+            const { name } = req.body;
+
+            const existRole = await pool.query("SELECT * FROM roles WHERE id=$1",[roleId]);
+
+            if (!existRole.rows.length) {
+                return next(new NotFoundError(404, "Role not found with this id"));
+            }
+
+            if (existRole.rows[0].name === "admin") {
+                return next(
+                    new ConflictError(409, "Admin role cannot be updated!")
+                );
+            }
+
+            const duplicateRole = await pool.query("SELECT * FROM roles WHERE name=$1 AND id!=$2",[name, roleId]);
+
+            if (duplicateRole.rows.length) {
+                return next(
+                    new ConflictError(409, "Role already exist")
+                );
+            }
+
+            await pool.query("UPDATE roles SET name=$1 WHERE id=$2",[name, roleId]);
+
+            return {
+                status: 200,
+                message: "Role updated successfully!"
+            };
+
+        } catch (error) {
+            return next(new InternalServerError(500, error.message));
+        }
+    }
+
+
     async deleteRole(req,next){
         try {
             const { roleId } = req.params

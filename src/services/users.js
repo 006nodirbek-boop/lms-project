@@ -1,6 +1,6 @@
 import pool from "../config/db.js"
 import argon from "argon2"
-import { InternalServerError } from "../utils/error.js"
+import { BadRequestError, ConflictError, InternalServerError, NotFoundError } from "../utils/error.js"
 
 class UserServices{
 
@@ -87,6 +87,59 @@ class UserServices{
 
         } catch (error) {
             next(new InternalServerError(500,error))
+        }
+    }
+
+    async updateUser(req, next) {
+        try {
+            const { userId } = req.params;
+            const { fullname, phone, password, role_id } = req.body;
+
+            if (!fullname || !phone || !role_id) {
+                return next(
+                    new BadRequestError(400, "All required fields must be provided")
+                );
+            }
+
+            const existUser = await pool.query("SELECT * FROM users WHERE id=$1",[userId]);
+
+            if (!existUser.rows.length) {
+                return next(
+                    new NotFoundError(404, "User not found with this id")
+                );
+            }
+
+            const duplicatePhone = await pool.query("SELECT * FROM users WHERE phone=$1 AND id!=$2",[phone, userId]);
+
+            if (duplicatePhone.rows.length) {
+                return next(
+                    new ConflictError(409, "Phone number already exists")
+                );
+            }
+
+            const existRole = await pool.query("SELECT * FROM roles WHERE id=$1",[role_id]);
+
+            if (!existRole.rows.length) {
+                return next(
+                    new NotFoundError(404, "Role not found with this id")
+                );
+            }
+
+            if (password) {
+                const hashPassword = await argon.hash(password);
+    
+                await pool.query(`UPDATE users SET fullname=$1, phone=$2, password=$3, role_id=$4 WHERE id=$5`,[fullname, phone, hashPassword, role_id, userId]);
+            } else {
+                await pool.query(`UPDATE users SET fullname=$1, phone=$2, role_id=$3 WHERE id=$4`,[fullname, phone, role_id, userId]);
+            }
+
+            return {
+                status: 200,
+                message: "User updated successfully!"
+            };
+
+        } catch (error) {
+            return next(new InternalServerError(500, error.message));
         }
     }
 

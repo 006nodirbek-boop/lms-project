@@ -79,6 +79,69 @@ class CourseService{
             message:"Course aproved!"
         }
     }
+
+    async updateCourse(req, next) {
+        try {
+            const { courseId } = req.params;
+            const { name, description, level, price, category_id } = req.body;
+
+            const teacherId = req.user.id;
+
+            const existCourse = await pool.query("SELECT * FROM courses WHERE id=$1",[courseId]);
+
+            if (!existCourse.rows.length) {
+                return next(new NotFoundError(404, "Course not found!"));
+            }
+
+            if (req.user.role !== "admin" && existCourse.rows[0].user_id != teacherId) {
+                return next(new Error("You are not allowed to update this course"));
+            }
+
+            const existCategory = await pool.query("SELECT * FROM categories WHERE id=$1",[category_id]);
+
+            if (!existCategory.rows.length) {
+                return next(new NotFoundError(404, "Category not found!"));
+            }
+
+            await pool.query(`UPDATE courses SET name=$1,description=$2,level=$3,price=$4,category_id=$5 WHERE id=$6`,[name, description, level, price, category_id, courseId]);
+
+            return {
+                status: 200,
+                message: "Course updated successfully!"
+            };
+
+        } catch (error) {
+            return next(error);
+        }
+    }
+
+    async deleteCourse(req, next) {
+        try {
+            const { courseId } = req.params;
+            const userId = req.user.id;
+
+            const existCourse = await pool.query("SELECT * FROM courses WHERE id=$1",[courseId]);
+
+            if (!existCourse.rows.length) {
+                return next(new NotFoundError(404, "Course not found"));
+            }
+
+            if (req.user.role !== "admin" && existCourse.rows[0].user_id != userId) {
+                return next(new NotFoundError(403, "You cannot delete this course"));
+            }
+
+            await pool.query("DELETE FROM courses WHERE id=$1",[courseId]);
+
+            return {
+                status: 200,
+                message: "Course deleted successfully!"
+            };
+
+        } catch (error) {
+            return next(error);
+        }
+    }
+
 }
 
 const courseService = new CourseService()
