@@ -9,6 +9,25 @@ class TeacherController{
             return res.status(resData.status).json(resData)
         }
     }
+
+
+    async updateTeacher(req, res, next) {
+        let resData = await teacherService.updateTeacher(req, next)
+
+        if (resData) {
+            return res.status(resData.status).json(resData)
+        }
+    }
+
+
+    async deleteTeacher(req, res, next) {
+        let resData = await teacherService.deleteTeacher(req, next)
+
+        if (resData) {
+            return res.status(resData.status).json(resData)
+        }
+    }
+
 }
 
 const teacherController = new TeacherController

@@ -9,6 +9,7 @@ const router = express.Router()
 router
     .get("/sections/:courseId",authGuard,roleGuard("teacher","admin","student"),sectionController.getSectionsById)
     .post("/sections",authGuard,roleGuard("teacher","admin"),sectionController.createSection)
+    .put("/sections/:sectionId",authGuard,roleGuard("teacher","admin"),sectionController.updateSection)
     .delete("/sections/:sectionId",authGuard,roleGuard("teacher","admin"),sectionController.deleteSection)
 
 export default router

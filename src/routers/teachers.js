@@ -8,8 +8,8 @@ const router = express.Router()
 
 router
     .get("/teachers/all",authGuard,roleGuard("admin"),teacherController.getAllTeachers)
-    // .post("/admins",authGuard,roleGuard("admin"),middleware.createUsers,userController.createAdmin)
-    // .post("/teachers",userController.createTeacher)
-    // .delete("/users/:userId",userController.deleteUser)
+    .put("/teachers/:teacherId",authGuard,roleGuard("admin"),teacherController.updateTeacher)
+    .delete("/teachers/:teacherId",authGuard,roleGuard("admin"),teacherController.deleteTeacher)
+
 
 export default router

@@ -1,5 +1,5 @@
 import pool from "../config/db.js"
-import { ConflictError, NotFoundError } from "../utils/error.js"
+import { ConflictError, InternalServerError, NotFoundError } from "../utils/error.js"
 
 class CategoriesService{
 
@@ -29,6 +29,34 @@ class CategoriesService{
         }
     }
 
+    async updateCategory(req,next){
+        try {
+            const { categoryId } = req.params
+            const { name } = req.body
+
+            const existCategory = await pool.query("select * from categories where id=$1 and status='active'",[categoryId])
+
+            if (!existCategory.rows.length) {
+                return next(new NotFoundError(404,"Category not found!"))
+            }
+
+            const duplicateCategory = await pool.query("select * from categories where name=$1 and id!=$2 and status='active'",[name,categoryId])
+
+            if (duplicateCategory.rows.length) {
+                return next(new ConflictError(409,"Category name already exist!"))
+            }
+
+            await pool.query("update categories set name=$1 where id=$2",[name,categoryId])
+
+            return {
+                status:200,
+                message:"Category updated successfully!"
+            }
+
+        } catch (error) {
+            return next(new InternalServerError(500,error.message))
+        }
+    }
 
     async deleteCategory(req,next){
         try {

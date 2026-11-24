@@ -122,3 +122,7 @@
 [23.11.2026, 17:27:03]_POST_/api/v1/exams_повторяющееся значение ключа нарушает ограничение уникальности "exams_varianta_key"
 [23.11.2026, 17:27:14]_POST_/api/v1/exams_повторяющееся значение ключа нарушает ограничение уникальности "exams_varianta_key"
 [23.11.2026, 17:27:20]_POST_/api/v1/exams_повторяющееся значение ключа нарушает ограничение уникальности "exams_varianta_key"
+[24.11.2026, 00:50:08]_DELETE_/api/v1/users/1_ReferenceError: NotFoundError is not defined
+[24.11.2026, 00:51:01]_DELETE_/api/v1/users/1_ReferenceError: NotFoundError is not defined
+[24.11.2026, 00:52:18]_POST_/api/v1/teachers_error: повторяющееся значение ключа нарушает ограничение уникальности "users_phone_key"
+[24.11.2026, 01:44:04]_POST_/api/v1/teachers_error: повторяющееся значение ключа нарушает ограничение уникальности "users_phone_key"

@@ -17,6 +17,14 @@ class SectionController{
         }
     }
 
+    async updateSection(req, res, next){
+        const resData = await sectionService.updateSection(req,next)
+
+        if (resData) {
+            return res.status(resData.status).json(resData)
+        }
+    }
+
     async deleteSection(req, res, next){
         const resData = await sectionService.deleteSection(req,next)
 
