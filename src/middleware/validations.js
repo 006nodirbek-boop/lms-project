@@ -15,7 +15,6 @@ export default{
         }
     },
 
-
     createCourse:(req,res,next)=>{
         try {
             let { error } = schema.coursesSchema.validate(req.body)
@@ -29,95 +28,86 @@ export default{
         }
     },
     
-         
     login: (req, res, next) => {
-    const { error } = schema.loginSchema.validate(req.body);
+        const { error } = schema.loginSchema.validate(req.body);
 
-    if (error) {
-        return next(new BadRequestError(400, error.message));
-    }
-
-    next();
+        if (error) {
+            return next(new BadRequestError(400, error.message));
+        }
+        next();
     },
 
     register: (req, res, next) => {
-    const { error } = schema.registerSchema.validate(req.body);
+        const { error } = schema.registerSchema.validate(req.body);
 
-    if (error) {
-        return next(new BadRequestError(400, error.message));
-    }
-
-    next();
+        if (error) {
+            return next(new BadRequestError(400, error.message));
+        }
+        next();
     },
 
     createRole: (req, res, next) => {
-    const { error } = schema.roleSchema.validate(req.body);
+        const { error } = schema.roleSchema.validate(req.body);
 
-    if (error) {
-        return next(new BadRequestError(400, error.message));
-    }
+        if (error) {
+            return next(new BadRequestError(400, error.message));
+        }
 
-    next();
+        next();
     },
 
     createCategory: (req, res, next) => {
-    const { error } = schema.categorySchema.validate(req.body);
+        const { error } = schema.categorySchema.validate(req.body);
 
-    if (error) {
-        return next(new BadRequestError(400, error.message));
-    }
-
-    next();
+        if (error) {
+            return next(new BadRequestError(400, error.message));
+        }
+        next();
     },
 
     createSection: (req, res, next) => {
-    const { error } = schema.sectionSchema.validate(req.body);
+        const { error } = schema.sectionSchema.validate(req.body);
 
-    if (error) {
-        return next(new BadRequestError(400, error.message));
-    }
-
-    next();
+        if (error) {
+            return next(new BadRequestError(400, error.message));
+        }
+        next();
     },
 
     createLesson: (req, res, next) => {
-    const { error } = schema.lessonSchema.validate(req.body);
+        const { error } = schema.lessonSchema.validate(req.body);
 
-    if (error) {
-        return next(new BadRequestError(400, error.message));
-    }
-
-    next();
+        if (error) {
+            return next(new BadRequestError(400, error.message));
+        }
+        next();
     },
 
     createMaterial: (req, res, next) => {
-    const { error } = schema.materialSchema.validate(req.body);
+        const { error } = schema.materialSchema.validate(req.body);
 
-    if (error) {
-        return next(new BadRequestError(400, error.message));
-    }
-
-    next();
+        if (error) {
+            return next(new BadRequestError(400, error.message));
+        }
+        next();
     },
 
     createHomework: (req, res, next) => {
-    const { error } = schema.homeworkSchema.validate(req.body);
+        const { error } = schema.homeworkSchema.validate(req.body);
 
-    if (error) {
-        return next(new BadRequestError(400, error.message));
-    }
-
-    next();
+        if (error) {
+            return next(new BadRequestError(400, error.message));
+        }
+        next();
     },
 
     createExam: (req, res, next) => {
-    const { error } = schema.examSchema.validate(req.body);
+        const { error } = schema.examSchema.validate(req.body);
 
-    if (error) {
-        return next(new BadRequestError(400, error.message));
-    }
-
-    next();
+        if (error) {
+            return next(new BadRequestError(400, error.message));
+        }
+        next();
     }
 
 
