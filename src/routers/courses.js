@@ -10,7 +10,7 @@ router
     .get("/courses",courseController.getCourses)
     .get("/courses/my",authGuard,roleGuard("teacher","student"),courseController.getMyCourses)
     .get("/courses/all",authGuard,roleGuard("admin"),courseController.getAllCourses)
-    .post("/courses",authGuard,roleGuard("teacher"),middleware.createCourse,courseController.createCourse)
+    .post("/courses",authGuard,roleGuard("teacher","admin"),middleware.createCourse,courseController.createCourse)
     .put("/courses/aprove/:courseId",authGuard,roleGuard("admin"),courseController.aproveCourse)
     .put("/courses/:courseId",authGuard,roleGuard("teacher","admin"),middleware.createCourse,courseController.updateCourse)
     .delete("/courses/:courseId",authGuard,roleGuard("teacher", "admin"),courseController.deleteCourse)

@@ -1,6 +1,6 @@
 import pool from "../config/db.js"
 import {extname, join} from "path"
-import { NotFoundError } from "../utils/error.js"
+import { BadRequestError, ConflictError, NotFoundError } from "../utils/error.js"
 
 class CourseService{
 
@@ -33,34 +33,103 @@ class CourseService{
         }
     }
 
-    async createCourse(req,next){
-        const { name, description, level, price, category_id } = req.body
-        const { banner, intro_video } = req.files
-        const teacherId = req.user.id 
+    // async createCourse(req,next){
+    //     const { name, description, level, price, category_id } = req.body
+    //     const { banner, intro_video } = req.files
+    //     const teacherId = req.user.id 
 
-        const existCategory = await pool.query("select * from categories where id=$1",[category_id])
-        if (!existCategory.rows.length) {
-            next(new NotFoundError(404,"Category not found with this id"))
-        }
+    //     const existCategory = await pool.query("select * from categories where id=$1",[category_id])
+    //     if (!existCategory.rows.length) {
+    //         next(new NotFoundError(404,"Category not found with this id"))
+    //     }
 
-        const filename_banner = Date.now() + extname(banner.name)      //// avatar.jpg // .jpg
-        const filename_video = Date.now() + extname(intro_video.name)
+    //     const filename_banner = Date.now() + extname(banner.name)      //// avatar.jpg // .jpg
+    //     const filename_video = Date.now() + extname(intro_video.name)
 
-        await pool.query("insert into courses(banner, intro_video, name, description, level, price, category_id, user_id) values($1,$2,$3,$4,$5,$6,$7,$8)",[filename_banner,filename_video,name,description,level,price,category_id,teacherId])
+    //     await pool.query("insert into courses(banner, intro_video, name, description, level, price, category_id, user_id) values($1,$2,$3,$4,$5,$6,$7,$8)",[filename_banner,filename_video,name,description,level,price,category_id,teacherId])
 
-        banner.mv(join(process.cwd(),"src","uploads",filename_banner),err =>{
-            if (err) {
-                console.log(err);
+    //     banner.mv(join(process.cwd(),"src","uploads",filename_banner),err =>{
+    //         if (err) {
+    //             console.log(err);
+    //         }
+    //     })
+    //     intro_video.mv(join(process.cwd(),"src","uploads",filename_video),err =>{
+    //         if (err) {
+    //             console.log(err);
+    //         }
+    //     })
+    //     return{
+    //         status:201,
+    //         message:"Course added!"
+    //     }
+    // }
+
+    async createCourse(req, next) {
+        try {
+            const { name, description, level, price, category_id } = req.body;
+            const { banner, intro_video } = req.files || {};
+            const teacherId = req.user.id;
+
+            if (!banner) {
+                return next(new BadRequestError(400, "Please upload a banner image"));
             }
-        })
-        intro_video.mv(join(process.cwd(),"src","uploads",filename_video),err =>{
-            if (err) {
-                console.log(err);
+
+            const allowedImageExtensions = [".jpg", ".jpeg", ".png", ".webp", ".gif"];
+
+            const bannerExtension = extname(banner.name).toLowerCase();
+
+            const isImage = banner.mimetype?.startsWith("image/");
+
+            if (!allowedImageExtensions.includes(bannerExtension) || !isImage) {
+                return next(new BadRequestError(400, "Please upload an image for the banner"));
             }
-        })
-        return{
-            status:201,
-            message:"Course added!"
+
+            if (!intro_video) {
+                return next(new BadRequestError(400, "Please upload an intro video"));
+            }
+
+            const allowedVideoExtensions = [".mp4", ".mov", ".avi", ".wmv", ".flv", ".mkv", ".webm"];
+
+            const videoExtension = extname(intro_video.name).toLowerCase();
+
+            const isVideo = intro_video.mimetype?.startsWith("video/");
+
+            if (!allowedVideoExtensions.includes(videoExtension) || !isVideo) {
+                return next(new BadRequestError(400, "Please upload a video, not an image or other file"));
+            }
+
+            const existCategory = await pool.query("select * from categories where id=$1",[category_id]);
+
+            if (!existCategory.rows.length) {
+                return next(new NotFoundError(404, "Category not found"));
+            }
+
+            const existCourse = await pool.query(
+                "select * from courses where name=$1 and user_id=$2",
+                [name, teacherId]
+            );
+
+            if (existCourse.rows.length) {
+                return next(new ConflictError(409, "This course already exists"));
+            }
+
+            const filename_banner = Date.now() + bannerExtension;
+            const filename_video = Date.now() + videoExtension;
+
+            await banner.mv(join(process.cwd(), "src", "uploads", filename_banner));
+
+            await intro_video.mv(join(process.cwd(), "src", "uploads", filename_video));
+
+            await pool.query("insert into courses(banner, intro_video, name, description, level, price, category_id, user_id) values($1,$2,$3,$4,$5,$6,$7,$8)",
+            [filename_banner, filename_video, name, description, level, price, category_id, teacherId]);
+
+            return {
+                status: 201,
+                message: "Course added!"
+            };
+
+        } catch (error) {
+            return next(error);
         }
     }
 
