@@ -33,37 +33,6 @@ class CourseService{
         }
     }
 
-    // async createCourse(req,next){
-    //     const { name, description, level, price, category_id } = req.body
-    //     const { banner, intro_video } = req.files
-    //     const teacherId = req.user.id 
-
-    //     const existCategory = await pool.query("select * from categories where id=$1",[category_id])
-    //     if (!existCategory.rows.length) {
-    //         next(new NotFoundError(404,"Category not found with this id"))
-    //     }
-
-    //     const filename_banner = Date.now() + extname(banner.name)      //// avatar.jpg // .jpg
-    //     const filename_video = Date.now() + extname(intro_video.name)
-
-    //     await pool.query("insert into courses(banner, intro_video, name, description, level, price, category_id, user_id) values($1,$2,$3,$4,$5,$6,$7,$8)",[filename_banner,filename_video,name,description,level,price,category_id,teacherId])
-
-    //     banner.mv(join(process.cwd(),"src","uploads",filename_banner),err =>{
-    //         if (err) {
-    //             console.log(err);
-    //         }
-    //     })
-    //     intro_video.mv(join(process.cwd(),"src","uploads",filename_video),err =>{
-    //         if (err) {
-    //             console.log(err);
-    //         }
-    //     })
-    //     return{
-    //         status:201,
-    //         message:"Course added!"
-    //     }
-    // }
-
     async createCourse(req, next) {
         try {
             const { name, description, level, price, category_id } = req.body;

@@ -73,7 +73,6 @@ class HomeworksService{
     }
 
 
-
     async updateHomework(req, next) {
         try {
             const { homeworkId } = req.params
@@ -124,7 +123,6 @@ class HomeworksService{
             )
         }
     }
-
 
 
     async deleteHomework(req, next) {
